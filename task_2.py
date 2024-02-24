@@ -73,7 +73,7 @@ def play_kki(player1: defaultdict, player2: defaultdict, changes: tuple) -> list
             else:
                 player2[card] -= 1
         result.append(indicator_diversity(player1, player2))
-    return(result)
+    return result
 
 
 if __name__ == '__main__':
