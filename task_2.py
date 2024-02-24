@@ -77,6 +77,7 @@ def play_kki(player1: defaultdict, player2: defaultdict, changes: tuple) -> list
 
 
 if __name__ == '__main__':
+    
     # lst = tuple(map(int, input().split()))
     # player1 = player_cards(map(int, input().split()))
     # player2 = player_cards(map(int, input().split()))
@@ -94,5 +95,19 @@ if __name__ == '__main__':
     player2 = player_cards(map(int, '1001 2001 1000'.split()))
     changes = tuple(i.split() for i in ('1 A 100000', '-1 B 2001', '1 B 2000', '1 B 100001', '1 A 1'))
     assert play_kki(player1, player2, changes) == [3, 2, 1, 2, 3]
+    lst = 2, 5, 10
+    player1 = player_cards(map(int, '1 2'.split()))
+    player2 = player_cards(map(int, '1 2 3 4 5'.split()))
+    changes = tuple(i.split() for i in ('1 A 3', '1 A 4', '1 A 5', '1 A 6', '1 A 7', '-1 A 1', '1 B 7', '-1 A 6', '-1 B 1', '1 A 7'))
+    assert play_kki(player1, player2, changes) == [2, 1, 0, 1, 2, 3, 2, 1, 0, 1]
+
+    lst = 3, 3, 20
+    player1 = player_cards(map(int, '1 6 7'.split()))
+    player2 = player_cards(map(int, '2 4 5'.split()))
+    changes = tuple(i.split() for i in ('1 A 2', '1 B 1', '1 B 8', '1 B 5', '1 A 3',
+                                        '1 A 2', '1 B 10', '1 A 9', '1 A 8', '1 B 7',
+                                        '-1 A 1', '-1 B 5', '-1 B 5', '-1 B 4', '-1 A 6',
+                                        '-1 A 8', '-1 A 2', '-1 B 8', '-1 B 10', '-1 A 2'))
+    assert play_kki(player1, player2, changes) == [5, 4, 5, 5, 6, 7, 8, 9, 8, 7, 8, 8, 7, 6, 5, 6, 5, 4, 3, 4]
 
     print("Test OK")
