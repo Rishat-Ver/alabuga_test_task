@@ -68,14 +68,13 @@ def lizard_calendar(start: str, end: str) -> str:
 
 if __name__ == '__main__':
 
-    date_start1 = "980 2 12 10 30 1"
-    date_end1 = "980 3 1 10 31 37"
+    date_start = "980 2 12 10 30 1"
+    date_end = "980 3 1 10 31 37"
+    assert lizard_calendar(date_start, date_end) == "17 96"
 
-    date_start2 = "1001 5 20 14 15 16"
-    date_end2 = "9009 9 11 12 21 11"
-
-    assert lizard_calendar(date_start1, date_end1) == "17 96"
-    assert lizard_calendar(date_start2, date_end2) == "2923033 79555"
+    date_start = "1001 5 20 14 15 16"
+    date_end = "9009 9 11 12 21 11"
+    assert lizard_calendar(date_start, date_end) == "2923033 79555"
 
     # date_start = input()
     # date_end = input()
