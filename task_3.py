@@ -53,7 +53,7 @@ def dictionary_formation(colomn: list, rows: list[list[int]]) -> OrderedDict:
     dictionary = OrderedDict([(i[0], list(i[1:])) for i in lst])
     return dictionary
 
-def func(rows: list[list[int]], colomn: list, dictionary: OrderedDict, conditions: list[list[str]]) -> int:
+def selection(rows: list[list[int]], colomn: list, dictionary: OrderedDict, conditions: list[list[str]]) -> int:
     result = 0
     for i in range(len(colomn)):
         row_sum = 0
@@ -73,13 +73,13 @@ if __name__ == '__main__':
     # rows = [list(map(int, input().split())) for _ in range(n)]
     # conditions = [input().split() for _ in range(q)]
     # dictionary = dictionary_formation(colomn, rows)
-    # print(func(rows, colomn, dictionary, conditions))
+    # print(selection(rows, colomn, dictionary, conditions))
 
     n, m, q = 2, 2, 3
     colomn = ['a', 'b']
     rows = [[1, 1], [2, 2]]
     conditions = [['a', '<', '3'], ['b', '>', '1'], ['b', '<', '3']]
     dictionary = dictionary_formation(colomn, rows)
-    assert func(rows, colomn, dictionary, conditions) == 4
-    
+    assert selection(rows, colomn, dictionary, conditions) == 4
+
     print("Test OK")
