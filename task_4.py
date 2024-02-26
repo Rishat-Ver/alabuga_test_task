@@ -26,9 +26,10 @@ class Employee:
         self.id = id
         self.lang = lang
         self.subordinate = []
+        self.employee = []
 
 
-def subordinate(hierarchy, lst_employee):
+def subordinates(hierarchy, lst_employee):
     stack = []
     for i in range(len(hierarchy)):
         sub_employee = [employee for employee in lst_employee if employee.id == hierarchy[i]][0]
@@ -41,30 +42,65 @@ def subordinate(hierarchy, lst_employee):
             else:
                 stack.pop()
 
+def employees(lst_employee):
+    for employee in lst_employee:
+        current = employee
+        while True:
+            flag = False
+            for x in lst_employee:
+                if current in [sub_emp for sub_emp in x.subordinate]:
+                    employee.employee.append(x)
+                    current = x
+                    flag = True
+                    break
+            if not flag or current == 0:
+                break
+
+def func(n, lst_employee):
+    result = []
+    for i in range(1, n+1):
+        emp = [e for e in lst_employee if e.id == i][0]
+        barrier = 0
+        flag = False
+        for i in emp.employee:
+            manager = [e for e in lst_employee if e.id == i.id][0]
+            if emp.lang == manager.lang or 'AB' in manager.lang:
+                flag = True
+                break
+            else:
+                barrier += 1
+        result.append(barrier if flag else 0)
+    return result
 
 
 if __name__ == '__main__':
-    n = int(input())                                 # 4
-    language = list(map(str, input().split()))       # A B A A
-    hierarchy = list(map(int, input().split()))      # 0 1 2 3 3 4 4 2 1 0
+    
+    # n = int(input())
+    # language = list(map(str, input().split()))
+    # hierarchy = list(map(int, input().split()))
+    # lst_employee = [Employee(0, 'AB')]
+    # lst_employee.extend([Employee(i, language[i-1]) for i in range(1, n+1)])
+    # subordinates(hierarchy, lst_employee)
+    # employees(lst_employee)
+    # print(*func(n, lst_employee))
+
+
+    n = 4
+    language = ['A', 'B', 'A', 'A']
+    hierarchy = [0, 1, 2, 3, 3, 4, 4, 2, 1, 0]
     lst_employee = [Employee(0, 'AB')]
     lst_employee.extend([Employee(i, language[i-1]) for i in range(1, n+1)])
-    subordinate(hierarchy, lst_employee)
-    for i in lst_employee:
-        print(i.id, i.subordinate)
-        # 0 [<__main__.Employee object at 0x0000021DF73DF450>]
-        # 1 [<__main__.Employee object at 0x0000021DF73DF490>]
-        # 2 [<__main__.Employee object at 0x0000021DF73DF4D0>, <__main__.Employee object at 0x0000021DF73DF510>]
-        # 3 []
-        # 4 []
+    subordinates(hierarchy, lst_employee)
+    employees(lst_employee)
+    assert func(n, lst_employee) == [0, 1, 1, 1]
 
+    n = 5
+    language = ['A', 'B', 'B', 'A', 'B']
+    hierarchy = [0, 1, 1, 2, 3, 4, 4, 5, 5, 3, 2, 0]
+    lst_employee = [Employee(0, 'AB')]
+    lst_employee.extend([Employee(i, language[i-1]) for i in range(1, n+1)])
+    subordinates(hierarchy, lst_employee)
+    employees(lst_employee)
+    assert func(n, lst_employee) == [0, 0, 0, 2, 0]
 
-
-"""
-4
-A B A A
-0 1 2 3 3 4 4 2 1 0
-
-
-0 1 1 1
-"""
+    print('Test OK')
