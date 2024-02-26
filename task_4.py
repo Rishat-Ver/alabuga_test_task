@@ -22,14 +22,14 @@
 """
 
 class Employee:
-    def __init__(self, id, lang):
+    def __init__(self, id: int, lang: str) -> None:
         self.id = id
         self.lang = lang
         self.subordinate = []
         self.employee = []
 
 
-def subordinates(hierarchy, lst_employee):
+def subordinates(hierarchy: list[int], lst_employee: list[Employee]) -> None:
     stack = []
     for i in range(len(hierarchy)):
         sub_employee = [employee for employee in lst_employee if employee.id == hierarchy[i]][0]
@@ -42,7 +42,7 @@ def subordinates(hierarchy, lst_employee):
             else:
                 stack.pop()
 
-def employees(lst_employee):
+def employees(lst_employee: list[Employee]) -> None:
     for employee in lst_employee:
         current = employee
         while True:
@@ -56,7 +56,7 @@ def employees(lst_employee):
             if not flag or current == 0:
                 break
 
-def func(n, lst_employee):
+def func(n: int, lst_employee: list[Employee]) -> list:
     result = []
     for i in range(1, n+1):
         emp = [e for e in lst_employee if e.id == i][0]
@@ -74,7 +74,7 @@ def func(n, lst_employee):
 
 
 if __name__ == '__main__':
-    
+
     # n = int(input())
     # language = list(map(str, input().split()))
     # hierarchy = list(map(int, input().split()))
